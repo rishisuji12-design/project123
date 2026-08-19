@@ -1,0 +1,80 @@
+{% extends "management/base.html" %}
+
+{% block title %}Issue Book{% endblock %}
+
+{% block content %}
+
+<h1>Issue Book</h1>
+
+{% if not books %}
+
+<p>No books are currently available.</p>
+
+{% elif not members %}
+
+<p>Please add a member first.</p>
+
+{% else %}
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    <label>Book:</label>
+
+    <select name="book" required>
+
+        <option value="">
+            Select Book
+        </option>
+
+        {% for book in books %}
+
+        <option value="{{ book.id }}">
+            {{ book.title }}
+        </option>
+
+        {% endfor %}
+
+    </select>
+
+    <br><br>
+
+    <label>Member:</label>
+
+    <select name="member" required>
+
+        <option value="">
+            Select Member
+        </option>
+
+        {% for member in members %}
+
+        <option value="{{ member.id }}">
+            {{ member.name }}
+        </option>
+
+        {% endfor %}
+
+    </select>
+
+    <br><br>
+
+    <label>Due Date:</label>
+
+    <input type="date"
+           name="due_date"
+           value="{{ default_due_date|date:'Y-m-d' }}"
+           required>
+
+    <br><br>
+
+    <button type="submit">
+        Issue Book
+    </button>
+
+</form>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "management/base.html" %}
+
+{% block title %}Add Member{% endblock %}
+
+{% block content %}
+
+<h1>Add Member</h1>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    <label>Name:</label>
+    <input type="text" name="name" required>
+
+    <br><br>
+
+    <label>Email:</label>
+    <input type="email" name="email" required>
+
+    <br><br>
+
+    <label>Phone:</label>
+    <input type="text" name="phone" required>
+
+    <br><br>
+
+    <label>Address:</label>
+    <textarea name="address" required></textarea>
+
+    <br><br>
+
+    <button type="submit">
+        Add Member
+    </button>
+
+</form>
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "management/base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<h1>📚 Library Management System</h1>
+
+<div class="dashboard">
+
+    <div class="card">
+        <h3>Total Books</h3>
+        <p>{{ total_books }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Total Members</h3>
+        <p>{{ total_members }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Issued Books</h3>
+        <p>{{ issued_books }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Overdue Books</h3>
+        <p>{{ overdue_books }}</p>
+    </div>
+
+</div>
+
+{% endblock %}{% extends "management/base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<h1>Library Management System</h1>
+
+<h2>Dashboard</h2>
+
+<p>Total Books: {{ total_books }}</p>
+
+<p>Total Members: {{ total_members }}</p>
+
+<p>Issued Books: {{ issued_books }}</p>
+
+<p>Overdue Books: {{ overdue_books }}</p>
+
+<hr>
+
+<a href="{% url 'books' %}">Books</a>
+
+<br><br>
+
+<a href="{% url 'members' %}">Members</a>
+
+<br><br>
+
+<a href="{% url 'issued_books' %}">Issued Books</a>
+
+<br><br>
+
+<a href="{% url 'issue_book' %}">Issue Book</a>
+
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "management/base.html" %}
+
+{% block title %}Issued Books{% endblock %}
+
+{% block content %}
+
+<h1>Issued Books</h1>
+
+<a href="{% url 'issue_book' %}">
+    Issue Book
+</a>
+
+<br><br>
+
+<table border="1" cellpadding="10">
+
+<tr>
+    <th>Book</th>
+    <th>Member</th>
+    <th>Issue Date</th>
+    <th>Due Date</th>
+    <th>Return Date</th>
+    <th>Status</th>
+    <th>Action</th>
+</tr>
+
+{% for issue in issues %}
+
+<tr>
+
+    <td>{{ issue.book.title }}</td>
+
+    <td>{{ issue.member.name }}</td>
+
+    <td>{{ issue.issue_date }}</td>
+
+    <td>{{ issue.due_date }}</td>
+
+    <td>
+        {{ issue.return_date|default:"Not returned" }}
+    </td>
+
+    <td>
+
+        {% if issue.return_date %}
+            Returned
+        {% elif issue.due_date < today %}
+            Overdue
+        {% else %}
+            Issued
+        {% endif %}
+
+    </td>
+
+    <td>
+
+        {% if not issue.return_date %}
+
+        <form method="POST"
+              action="{% url 'return_book' issue.id %}">
+
+            {% csrf_token %}
+
+            <button type="submit">
+                Return
+            </button>
+
+        </form>
+
+        {% endif %}
+
+    </td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+    <td colspan="7">
+        No issued books.
+    </td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

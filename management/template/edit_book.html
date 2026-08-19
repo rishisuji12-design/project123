@@ -1,0 +1,51 @@
+{% extends "management/base.html" %}
+
+{% block title %}Edit Book{% endblock %}
+
+{% block content %}
+
+<h1>Edit Book</h1>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    <label>Title:</label>
+    <input type="text"
+           name="title"
+           value="{{ book.title }}"
+           required>
+
+    <br><br>
+
+    <label>Author:</label>
+    <input type="text"
+           name="author"
+           value="{{ book.author }}"
+           required>
+
+    <br><br>
+
+    <label>ISBN:</label>
+    <input type="text"
+           name="isbn"
+           value="{{ book.isbn }}"
+           required>
+
+    <br><br>
+
+    <label>Category:</label>
+    <input type="text"
+           name="category"
+           value="{{ book.category }}"
+           required>
+
+    <br><br>
+
+    <button type="submit">
+        Update Book
+    </button>
+
+</form>
+
+{% endblock %}
